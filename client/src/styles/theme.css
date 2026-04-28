@@ -964,7 +964,7 @@ a:hover {
     }
 
     .nav-btn-logout {
-        display: none;
+        padding: 4px 6px;
     }
 
     .msg-bubble {
