@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getAllReviews, getReviewById } from "../services/review.service"
+import Footer from "../components/Footer"
 
 const History = () => {
     const [reviews, setReviews]   = useState([])
@@ -25,36 +26,39 @@ const History = () => {
     )
 
     return (
-        <div className="history-container">
-            <h2>Review History</h2>
+        <>
+            <div className="history-container">
+                <h2>Review History</h2>
 
-            {reviews.length === 0 && (
-                <p style={{ color: "var(--text-secondary)" }}>
-                    No reviews yet. Start by pasting your code!
-                </p>
-            )}
+                {reviews.length === 0 && (
+                    <p style={{ color: "var(--text-secondary)" }}>
+                        No reviews yet. Start by pasting your code!
+                    </p>
+                )}
 
-            <div className="history-list">
-                {reviews.map(review => (
-                    <div
-                        key={review._id}
-                        onClick={() => handleClick(review._id)}
-                        className="history-card"
-                    >
-                        <div>
-                            <p className="title">
-                                {review.title}
-                            </p>
-                            <p className="meta">
-                                {new Date(review.createdAt).toLocaleDateString()} —{" "}
-                                {review.chatHistory?.length || 0} messages
-                            </p>
+                <div className="history-list">
+                    {reviews.map(review => (
+                        <div
+                            key={review._id}
+                            onClick={() => handleClick(review._id)}
+                            className="history-card"
+                        >
+                            <div>
+                                <p className="title">
+                                    {review.title}
+                                </p>
+                                <p className="meta">
+                                    {new Date(review.createdAt).toLocaleDateString()} —{" "}
+                                    {review.chatHistory?.length || 0} messages
+                                </p>
+                            </div>
+                            <span className="arrow">→</span>
                         </div>
-                        <span className="arrow">→</span>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
-        </div>
+            <Footer />
+        </>
     )
 }
 

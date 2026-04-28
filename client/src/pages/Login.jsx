@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { login } from "../services/auth.service"
 import { useAuth } from "../context/AuthContext"
+import Footer from "../components/Footer"
 
 const Login = () => {
     const [form, setForm]     = useState({ email: "", password: "" })
@@ -29,51 +30,54 @@ const Login = () => {
     }
 
     return (
-        <div className="auth-wrapper">
-            <div className="auth-card">
-                <h2>Welcome Back</h2>
-                <p className="auth-subtitle">Sign in to continue reviewing code</p>
+        <>
+            <div className="auth-wrapper">
+                <div className="auth-card">
+                    <h2>Welcome Back</h2>
+                    <p className="auth-subtitle">Sign in to continue reviewing code</p>
 
-                {error && (
-                    <p className="error-msg">{error}</p>
-                )}
+                    {error && (
+                        <p className="error-msg">{error}</p>
+                    )}
 
-                <form onSubmit={handleSubmit}>
-                    <div className="input-group">
-                        <label>Email</label>
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder="you@example.com"
-                            value={form.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>Password</label>
-                        <input
-                            name="password"
-                            type="password"
-                            placeholder="••••••••"
-                            value={form.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <button type="submit" className="auth-btn" disabled={loading}>
-                        {loading ? "Logging in..." : "Login"}
-                    </button>
-                </form>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group">
+                            <label>Email</label>
+                            <input
+                                name="email"
+                                type="email"
+                                placeholder="you@example.com"
+                                value={form.email}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label>Password</label>
+                            <input
+                                name="password"
+                                type="password"
+                                placeholder="••••••••"
+                                value={form.password}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="auth-btn" disabled={loading}>
+                            {loading ? "Logging in..." : "Login"}
+                        </button>
+                    </form>
 
-                <p className="auth-footer">
-                    No account?{" "}
-                    <span onClick={() => navigate("/register")}>
-                        Register here
-                    </span>
-                </p>
+                    <p className="auth-footer">
+                        No account?{" "}
+                        <span onClick={() => navigate("/register")}>
+                            Register here
+                        </span>
+                    </p>
+                </div>
             </div>
-        </div>
+            <Footer />
+        </>
     )
 }
 

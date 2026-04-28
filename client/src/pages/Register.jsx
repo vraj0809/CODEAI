@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { register } from "../services/auth.service"
+import Footer from "../components/Footer"
 
 const Register = () => {
     const [form, setForm]       = useState({ username: "", email: "", password: "" })
@@ -32,43 +33,46 @@ const Register = () => {
     ]
 
     return (
-        <div className="auth-wrapper">
-            <div className="auth-card">
-                <h2>Create Account</h2>
-                <p className="auth-subtitle">Start reviewing your code with AI</p>
+        <>
+            <div className="auth-wrapper">
+                <div className="auth-card">
+                    <h2>Create Account</h2>
+                    <p className="auth-subtitle">Start reviewing your code with AI</p>
 
-                {error && (
-                    <p className="error-msg">{error}</p>
-                )}
+                    {error && (
+                        <p className="error-msg">{error}</p>
+                    )}
 
-                <form onSubmit={handleSubmit}>
-                    {fields.map(field => (
-                        <div key={field.name} className="input-group">
-                            <label>{field.label}</label>
-                            <input
-                                name={field.name}
-                                type={field.type}
-                                placeholder={field.placeholder}
-                                value={form[field.name]}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                    ))}
+                    <form onSubmit={handleSubmit}>
+                        {fields.map(field => (
+                            <div key={field.name} className="input-group">
+                                <label>{field.label}</label>
+                                <input
+                                    name={field.name}
+                                    type={field.type}
+                                    placeholder={field.placeholder}
+                                    value={form[field.name]}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        ))}
 
-                    <button type="submit" className="auth-btn" disabled={loading}>
-                        {loading ? "Registering..." : "Create Account"}
-                    </button>
-                </form>
+                        <button type="submit" className="auth-btn" disabled={loading}>
+                            {loading ? "Registering..." : "Create Account"}
+                        </button>
+                    </form>
 
-                <p className="auth-footer">
-                    Already have account?{" "}
-                    <span onClick={() => navigate("/login")}>
-                        Login here
-                    </span>
-                </p>
+                    <p className="auth-footer">
+                        Already have account?{" "}
+                        <span onClick={() => navigate("/login")}>
+                            Login here
+                        </span>
+                    </p>
+                </div>
             </div>
-        </div>
+            <Footer />
+        </>
     )
 }
 

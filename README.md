@@ -17,6 +17,38 @@ A full-stack, AI-powered application that acts as your personal senior developer
 - **AI Integration:** Groq API (LLaMA-3.1-8b-instant)
 - **Authentication:** JSON Web Tokens (JWT), bcryptjs
 
+## 📂 Project Structure
+
+```text
+CODEAI/
+├── BackEnd/                    # Express.js Server
+│   ├── api/                    # Vercel Serverless Entrypoint
+│   │   └── index.js            
+│   ├── src/                    
+│   │   ├── config/             # MongoDB connection (database.js)
+│   │   ├── controllers/        # Request logic (auth, ai, review)
+│   │   ├── middlewares/        # JWT validation & Security guards
+│   │   ├── models/             # Mongoose Schemas (user, history, blacklist)
+│   │   ├── routes/             # Express API Endpoints
+│   │   ├── services/           # External API calls (Groq AI logic)
+│   │   └── app.js              # Express application setup
+│   ├── vercel.json             # Backend Vercel deployment config
+│   └── server.js               # Local development entry
+│
+└── client/                     # React.js Frontend
+    ├── src/                    
+    │   ├── components/         # Reusable UI (Navbar, Footer, ProtectedRoute)
+    │   ├── context/            # React Global State (AuthContext, ThemeContext)
+    │   ├── pages/              # Main App Views (Landing, Login, Register, Chat, History)
+    │   ├── services/           # Axios interceptors & API wrappers
+    │   ├── styles/             # Vanilla CSS design system (theme.css)
+    │   ├── App.jsx             # React Router routing logic
+    │   └── main.jsx            # React DOM Entry
+    ├── index.html              
+    ├── vite.config.js          
+    └── vercel.json             # Frontend Vercel SPA routing config
+```
+
 ## 🧠 System Architecture & Logic
 
 Building the backend logic for this application was designed around security, speed, and reliable AI formatting. Here is how the core systems work:
