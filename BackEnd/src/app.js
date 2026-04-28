@@ -8,7 +8,9 @@ const app = express()
 
 
 app.use(cors({
-    origin: ["https://codeai-frontend.vercel.app", "http://localhost:5173"],
+    origin: function(origin, callback) {
+        callback(null, true);
+    },
     credentials: true
 }))
 
