@@ -11,8 +11,13 @@ const Navbar = () => {
     const { pathname } = useLocation()
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 640)
 
+    const [menuOpen, setMenuOpen] = useState(false)
+
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth <= 640)
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 640)
+            if (window.innerWidth > 640) setMenuOpen(false)
+        }
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
@@ -20,37 +25,70 @@ const Navbar = () => {
     const handleLogout = async () => {
         await logout()
         setUser(null)
+        setMenuOpen(false)
         navigate("/login")
     }
 
     return (
         <nav className="navbar">
             <Link to="/" className="navbar-brand">
-                {isMobile ? "⚡ AI" : "⚡ CodeReviewer AI"}
+                ⚡ CodeReviewer AI
             </Link>
 
-            <div className="navbar-links">
-                {user && (
-                    <>
-                        <Link to="/chat" className={`nav-link ${pathname.startsWith("/chat") ? "active" : ""}`}>
-                            {isMobile ? "💬" : "Chat"}
-                        </Link>
-                        <Link to="/history" className={`nav-link ${pathname === "/history" ? "active" : ""}`}>
-                            {isMobile ? "🕒" : "History"}
-                        </Link>
-                        <span className="nav-username">
-                            {user.username}
-                        </span>
-                        <button onClick={handleLogout} className="nav-btn-logout">
-                            {isMobile ? "🚪" : "Logout"}
-                        </button>
-                    </>
-                )}
+            {isMobile ? (
+                <>
+                    <button className="hamburger-btn" onClick={() => setMenuOpen(!menuOpen)}>
+                        {menuOpen ? "✖" : "☰"}
+                    </button>
 
-                <button onClick={toggleTheme} className="nav-btn-theme">
-                    {theme === "light" ? (isMobile ? "🌙" : "🌙 Dark") : (isMobile ? "☀️" : "☀️ Light")}
-                </button>
-            </div>
+                    {menuOpen && (
+                        <div className="mobile-menu">
+                            {user && (
+                                <>
+                                    <div className="mobile-user-info">
+                                        <span className="nav-username">{user.username}</span>
+                                    </div>
+                                    <Link to="/chat" onClick={() => setMenuOpen(false)} className={`nav-link mobile-link ${pathname.startsWith("/chat") ? "active" : ""}`}>
+                                        Chat
+                                    </Link>
+                                    <Link to="/history" onClick={() => setMenuOpen(false)} className={`nav-link mobile-link ${pathname === "/history" ? "active" : ""}`}>
+                                        History
+                                    </Link>
+                                    <button onClick={handleLogout} className="nav-btn-logout mobile-logout">
+                                        Logout
+                                    </button>
+                                </>
+                            )}
+                            <button onClick={() => { toggleTheme(); setMenuOpen(false); }} className="nav-btn-theme mobile-theme">
+                                {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+                            </button>
+                        </div>
+                    )}
+                </>
+            ) : (
+                <div className="navbar-links">
+                    {user && (
+                        <>
+                            <Link to="/chat" className={`nav-link ${pathname.startsWith("/chat") ? "active" : ""}`}>
+                                Chat
+                            </Link>
+                            <Link to="/history" className={`nav-link ${pathname === "/history" ? "active" : ""}`}>
+                                History
+                            </Link>
+                            <span className="nav-username">
+                                {user.username}
+                            </span>
+                            <button onClick={handleLogout} className="nav-btn-logout">
+                                Logout
+                            </button>
+                        </>
+                    )}
+
+                    <button onClick={toggleTheme} className="nav-btn-theme">
+                        {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+                    </button>
+                </div>
+            )}
         </nav>
     )
 }
