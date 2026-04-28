@@ -16,4 +16,4 @@ export const logout = () =>
     api.post("/api/auth/logout").then(r => r.data)
 
 export const getMe = () =>
-    api.get("/api/auth/me").then(r => r.data)
+    api.get("/api/auth/get-me").then(r => r.data)
