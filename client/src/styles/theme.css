@@ -965,9 +965,7 @@ a:hover {
         position: absolute;
         top: 56px;
         right: 0;
-        background: var(--navbar-bg);
-        backdrop-filter: var(--navbar-blur);
-        -webkit-backdrop-filter: var(--navbar-blur);
+        background: var(--card-bg);
         border: 1px solid var(--border);
         border-right: none;
         border-top: none;
@@ -977,7 +975,7 @@ a:hover {
         flex-direction: column;
         gap: 0.75rem;
         min-width: 200px;
-        box-shadow: -4px 8px 24px rgba(0,0,0,0.1);
+        box-shadow: -4px 8px 32px rgba(0,0,0,0.15);
         z-index: 1000;
         animation: slideInRight 0.3s ease-out;
     }
