@@ -14,9 +14,16 @@ const Chat = () => {
     const [prompt, setPrompt]           = useState("")
     const [loading, setLoading]         = useState(false)
     const [fetching, setFetching]       = useState(false)
+    const [isMobile, setIsMobile]       = useState(window.innerWidth <= 640)
     const bottomRef                     = useRef(null)
     const textareaRef                   = useRef(null)
     const { reviewId: paramReviewId }   = useParams()
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 640)
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     // load old chat if came from history
     useEffect(() => {
@@ -191,7 +198,7 @@ const Chat = () => {
                     value={prompt}
                     onChange={e => { setPrompt(e.target.value); autoResize() }}
                     onKeyDown={handleKeyDown}
-                    placeholder="Paste your code or ask a question... (Enter to send, Shift+Enter for new line)"
+                    placeholder={isMobile ? "Paste code or ask a question..." : "Paste your code or ask a question... (Enter to send, Shift+Enter for new line)"}
                     rows={1}
                 />
                 <button

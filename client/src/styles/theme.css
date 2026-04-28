@@ -246,8 +246,8 @@ a:hover {
     background: var(--score-bad);
     color: white;
     border-color: var(--score-bad);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
 }
 
 .nav-btn-theme {
@@ -264,7 +264,8 @@ a:hover {
     border-color: var(--accent);
     background: var(--accent-glow);
     color: var(--accent);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--accent-glow);
 }
 
 
@@ -382,7 +383,8 @@ a:hover {
 
 .landing-cta:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 30px var(--accent-glow);
+    box-shadow: 0 10px 40px var(--accent-glow), 0 0 15px var(--accent-glow);
+    filter: brightness(1.1);
 }
 
 .landing-cta:active {
@@ -480,8 +482,9 @@ a:hover {
 }
 
 .auth-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px var(--accent-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--accent-glow), 0 0 10px var(--accent-glow);
+    filter: brightness(1.1);
 }
 
 .auth-btn:active {
@@ -549,8 +552,9 @@ a:hover {
 }
 
 .chat-new-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--accent-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--accent-glow), 0 0 8px var(--accent-glow);
+    filter: brightness(1.1);
 }
 
 .chat-messages {
@@ -683,7 +687,8 @@ a:hover {
 
 .chat-send-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--accent-glow);
+    box-shadow: 0 8px 25px var(--accent-glow), 0 0 10px var(--accent-glow);
+    filter: brightness(1.1);
 }
 
 .chat-send-btn:disabled {
@@ -828,7 +833,13 @@ a:hover {
     }
 
     .nav-username {
-        display: none;
+        padding: 4px 8px;
+        font-size: 11px;
+        max-width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
     }
 
     .nav-btn-logout,
